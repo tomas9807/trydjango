@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from newsletter import views
 urlpatterns = [
-    path('',views.home),
+    path('',views.home,name='home'),
+    path('contact/',views.contact,name='contact'),
     path('admin/', admin.site.urls),
 ]

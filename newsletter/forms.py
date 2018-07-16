@@ -1,6 +1,19 @@
 from django import forms
 from .models import SignUp
 
+class ContactForm(forms.Form):
+    full_name = forms.CharField(max_length=10)
+    email = forms.EmailField()
+    message = forms.Textarea()
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        emailbase,provider = email.split('@')
+        domain,extension = provider.split('.')
+        if not '.edu' in email:
+            raise forms.ValidationError("Use valide college email")
+        return email
+
+
 class SingUpForm(forms.ModelForm):
     class Meta:
         model = SignUp
