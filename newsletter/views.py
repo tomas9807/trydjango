@@ -22,7 +22,7 @@ def contact(request):
         form_full_name = form.cleaned_data.get('full_name')
         form_message = form.cleaned_data.get('message')
         form_subject = form.cleaned_data.get('subject')
-        print(settings.EMAIL_HOST_USER,form_email,settings.EMAIL_HOST)
+      
 
-        send_mail(f'{form_subject},{form_full_name}',form_message,settings.EMAIL_HOST_USER,[form_email],fail_silently=False)
+        send_mail(f'{form_subject},{form_full_name}',form_message,'tomastorres9807@gmail.com',['tomastorres9807@gmail.com'],fail_silently=False)
     return render(request,'newsletter/contact.html',{'form':form})
