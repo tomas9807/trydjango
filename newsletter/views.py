@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import SingUpForm,ContactForm
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 from .models import SignUp
 def home(request):
@@ -16,6 +18,9 @@ def home(request):
 def contact(request):
     form = ContactForm(request.POST or None)
     if form.is_valid():
-        email = form.cleaned_data.get('email')
-        print(email)
+        form_email = form.cleaned_data.get('email')
+        form_full_name = form.cleaned_data.get('full_name')
+        form_message = form.cleaned_data.get('message')
+        form_subject = form.cleaned_data.get('subject')
+        send_email(form_subject,form_message,settings.EMAIL_HOST_USER,[gufixiham@nickrizos.com],fail_silently=False)
     return render(request,'newsletter/forms.html',{'form':form})

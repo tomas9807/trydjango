@@ -2,9 +2,11 @@ from django import forms
 from .models import SignUp
 
 class ContactForm(forms.Form):
-    full_name = forms.CharField(max_length=10)
+    full_name = forms.CharField(max_length=20)
     email = forms.EmailField()
+    subject = forms.CharField(max_length=20)
     message = forms.Textarea()
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         emailbase,provider = email.split('@')
